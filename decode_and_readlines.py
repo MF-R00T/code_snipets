@@ -18,3 +18,12 @@ def decode_readlines(input_file):
                 continue
         else:
             raise ValueError("Unable to decode file with any supported encoding")
+        
+def decode_base64_filename(encoded_name):
+    try:
+        #extract first part of file name [0]
+        base64_part = encoded_name.split('.')[0]
+        decoded_bytes = base64.b64decode(base64_part)
+        return decoded_bytes.decode('utf-8')
+    except Exception:
+        return encoded_name  # Return original if decoding fails
